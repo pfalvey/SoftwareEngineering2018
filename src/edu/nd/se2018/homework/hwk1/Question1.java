@@ -1,13 +1,14 @@
 package edu.nd.se2018.homework.hwk1;
 
 import java.util.HashSet;
+import java.util.Set;
 
 public class Question1 {
 		
 	public Question1(){}
 	
 	public int getSumWithoutDuplicates(int[] numbers){
-		HashSet<Integer> h = new HashSet<Integer>();
+		Set<Integer> h = new HashSet<Integer>();
 		for (int x : numbers) {
 			h.add(x);
 		}
