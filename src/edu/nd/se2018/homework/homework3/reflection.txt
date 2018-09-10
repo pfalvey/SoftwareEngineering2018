@@ -1,0 +1,11 @@
+I decided to make my jockey class an interface for the strategy pattern behind the horse racing. The instructions
+mentioned that each jockey has his/her own style so I thought I would make that evident in my design. The three classes
+that implemented this class were EarlySprint, SlowStart, and SteadyRun. These all implemented the function run(). Based
+off of whatever the style of the jockey was, run() would execute accordingly. I also chose to use an interface because
+I wanted each different style of jockey to implement their own strategy. For the actual racing, I had my race class which
+controlled the flow of the race. I also had a horse class that represented each horse. Each horse had it's own jockey
+strategy, among other things such as name and position (position was how many miles into the 10 mile track the horse it).
+The main loop for the racing is in the race class in the runRace() function. The horses are stored in an array list and
+runRace() goes through that loop and updates their position until someone hits the 10 mile marker. I decided to use an
+array list so that I could add as many horses as I wanted without placing a cap on them. I also had the race loop in the
+Race class because that class is supposed to control the race flow.
