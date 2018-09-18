@@ -14,4 +14,5 @@ here. I first populate the islands like in the OceanMap constructor, then I add 
 random positions for Columbus' ship and for the two pirate ships and change it using their setShipPosition method.
 In order to have the island tiles and water tiles be photos of actual islands/water, I would create new image objects for
 the water and the islands. So a new Images and ImageViews. So instead of coloring the tile blue or green, I just add
-in a new Image/ImageView to its position.
+in a new Image/ImageView to its position. I would also handle this in my OceanMap class where the ocean and island
+tiles are initially added to the grid.
