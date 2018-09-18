@@ -1,0 +1,17 @@
+NOTE: I received an extension on this assignment due to an interview. Thank you!
+
+I overall was very happy with my design. Per usual, having good object oriented design and using classes
+makes my design a lot easier to work with. In terms of the actual observer pattern, I really liked this new
+pattern. I had never used it before so it was good to implement it. What I liked about it is that it abstracts
+away a layer of monitoring/time keeping (per say). I think that in the past, before knowing about this pattern,
+I would've probably had a clock and would've checked if the position of Columbus' ship changed before moving the
+pirate ships. With the observer pattern and it's update function, I don't have to worry about that specific of 
+coordination. Simply whenever Columbus' ship changes, it let's the pirates know so that they automatically chase him.
+JavaFX was also fairly straightforward to use which made this design work as well.
+
+In order to reset the board, I would probably just clear the board and start from scratch like what I do in my code
+here. I first populate the islands like in the OceanMap constructor, then I add the water. I then would generate new
+random positions for Columbus' ship and for the two pirate ships and change it using their setShipPosition method.
+In order to have the island tiles and water tiles be photos of actual islands/water, I would create new image objects for
+the water and the islands. So a new Images and ImageViews. So instead of coloring the tile blue or green, I just add
+in a new Image/ImageView to its position.
