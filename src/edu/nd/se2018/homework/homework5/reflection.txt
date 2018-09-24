@@ -1,0 +1,54 @@
+Reflection
+Patrick Falvey
+Homework 5
+
+Reflection question 1:
+The main design changes that were made for this assignment came from the scaling and
+checking. In the scaling portion, there were two main areas of scaling -- adding the 
+second train and track, and adding the option for the cars to turn. For the new train
+and train track, nothing about the design changed other than in the simulation where I
+added the new variable. For the train, I did reverse the image if it was traveling
+west to east. For the gates, the design changes came from the checking. I added new 
+trigger and exit points to accommodate both trains. In order to see if there was a train
+passing through either road, I added boolean variables for each of the trains. Essentially,
+I was making the design more complex by having the gates be able to check for multiple 
+trains. 
+For the connecting road, I mainly changed how the cars were added. I used the random speed
+variable to determine if the car would be turning or not. The way I did my math, about 
+1 out of every 10 cars would turn (assuming Math.random() is truly random). When a car
+would be turning, I would have it watch the west gate (the one it would eventually get to)
+rather than watching the east gate which is what it started out on. This way, it would
+handle "changing" gates easier. I also simply modified the move method to account for 
+when the turning cars get to the junction, they would follow the East-West road to get 
+to the western most road. 
+For both of these designs, I think I could improve their checking and initiation to be
+more object oriented as opposed to hard coded. I hard coded my gate names and variables
+along with my train variables thus limiting my immediate design to two trains. I could 
+scale up with this design with a copy and paste. Also, not all of the car code runs 
+smoothly. Often, cars will pile up on each other if there are a lot of cars. Also,
+cars that are added after a gate is already down will cross through that gate. This may
+be because of the observer pattern and that since the gate is already down, it isn't
+changing so the new car isn't detecting any change. I tested the original railroad crossing
+code and this behavior was exhibited there.
+
+Reflection question 2:
+As-is, some parts of my design would scale well and some parts would not. Fortunately for
+Mayor Buttigieg I believe I would know a fix to help scale up my whole design going
+forward. As-is, my checking of the gate and the trains would scale up well. There are only
+two ways that a train could travel along parallel tracks and my gates are checking for
+both of those ways. It could almost be looked at as a simple binary yes or no as to 
+whether trains from either side are coming. In order to scale up, I would just need to 
+make sure I loop through all the gates and trains and tracks. This brings me to my next 
+point; I am currently hard coding how many gates and trains and tracks I have in my 
+code. I explicitly state "train1" or "train2" for example. If I wanted to scale this up,
+I would need to write in more generic trains and gates so that I could easily loop through
+all the trains and gates and tracks as opposed to check specific ones.
+For the crossing road, just as with the multiple trains, parts of this would scale up well.
+Those main parts are the handling of the turning itself. It was fairly easily to handle
+multiple cars that were turning and having them switch roads. Starting them off to watch
+the west gate right from the start was the way to go. Some parts that would not scale 
+well would be more specific issues with the cars, such as having the cars stack on top
+of each other (i.e. not necessarily observing each other in the right way). This could
+be fixed through more work on the car and car factory. Implementing more cars would 
+scale-up well though because all the cars already are treated as generic cars. We don't
+hard code any cars into the simulation.

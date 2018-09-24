@@ -20,13 +20,15 @@ public class CarFactory {
 	private ArrayList<Car> cars = new ArrayList<Car>();
 	Direction direction;
 	Point location;
+	private int roadID;
 	
 	public CarFactory(){}
 	
-	public CarFactory(Direction direction, Point location, Collection<CrossingGate> gates){
+	public CarFactory(Direction direction, Point location, Collection<CrossingGate> gates, int roadID){
 		this.direction = direction;
 		this.location = location;
 		this.gates = gates;
+		this.roadID = roadID;
 	}
 	
 	
@@ -36,16 +38,52 @@ public class CarFactory {
 			Car car = new Car(location.x,location.y);	
 			double speedVariable = (Math.random() * 10)/10;
 			car.setSpeed((2-speedVariable)*1.5); 
-			
-			// All cars created by this factory must be aware of crossing gates in the road
-			for(CrossingGate gate: gates){
-				gate.addObserver(car);
-				if(gate != null && gate.getTrafficCommand()=="STOP")
-					car.setGateDownFlag(false);
+			if (Math.floor(speedVariable * 10) % 3 == 0)
+			{
+				car.isTurning = true;
 			}
 			
+			// All cars created by this factory must be aware of crossing gates in the road
+			if (roadID == 0)
+			{
+				for(CrossingGate gate: gates){
+					if (gate.gateName == "Gate2")
+					{
+						gate.addObserver(car);
+					}
+					if(gate != null && gate.getTrafficCommand()=="STOP")
+						car.setGateDownFlag(false);
+				}
+			}
+			else if (roadID == 1)
+			{
+				if (car.isTurning == false)
+				{
+					for(CrossingGate gate: gates){
+						if (gate.gateName == "Gate1")
+						{
+							gate.addObserver(car);
+						}
+						if(gate != null && gate.getTrafficCommand()=="STOP")
+							car.setGateDownFlag(false);
+					}
+				}
+				else
+				{
+					for(CrossingGate gate: gates){
+						if (gate.gateName == "Gate2")
+						{
+							gate.addObserver(car);
+						}
+						if(gate != null && gate.getTrafficCommand()=="STOP")
+							car.setGateDownFlag(false);
+					}
+				}
+			}
+			
+			
 			// Each car must observe the car infront of it so it doesn't collide with it.
-			if (previousCar != null)
+			if (previousCar != null && previousCar.isTurning == false)
 				previousCar.addObserver(car);
 			previousCar = car;
 			

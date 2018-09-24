@@ -3,6 +3,7 @@ package edu.nd.se2018.homework.homework5.model.infrastructure.gate;
 import java.util.Observable;
 import java.util.Observer;
 
+import edu.nd.se2018.homework.homework5.model.infrastructure.Direction;
 import edu.nd.se2018.homework.homework5.model.vehicles.Train;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -22,6 +23,11 @@ public class CrossingGate extends Observable implements Observer{
 	private int movingY;
 	private int triggerPoint;
 	private int exitPoint;
+	private int triggerPoint2;
+	private int exitPoint2;
+	private boolean isTrain1;
+	private boolean isTrain2;
+	
 
 	private IGateState gateClosed;
 	private IGateState gateOpen;
@@ -31,7 +37,7 @@ public class CrossingGate extends Observable implements Observer{
 	private Line line; 
 	private Pane root;
 	
-	String gateName;
+	public String gateName;
 	
 	public CrossingGate(){}
 	
@@ -40,9 +46,12 @@ public class CrossingGate extends Observable implements Observer{
 		anchorY = yPosition;
 		movingX = anchorX;
 		movingY = anchorY-60;
+		isTrain1 = false;
+		isTrain2 = false;
 		triggerPoint = anchorX+250;
 		exitPoint = anchorX-250;
-		
+		triggerPoint2 = anchorX-250;
+		exitPoint2 = anchorX+250;
 		// Gate elements
 		line = new Line(anchorX, anchorY,movingX,movingY);
 		line.setStroke(Color.RED);
@@ -119,11 +128,36 @@ public class CrossingGate extends Observable implements Observer{
 	public void update(Observable o, Object arg) {
 		if (o instanceof Train){
 			Train train = (Train)o;
-			if (train.getVehicleX() < exitPoint)
-				currentGateState.leaveStation();
-			else if(train.getVehicleX() < triggerPoint){
-				currentGateState.approachStation();
-			} 
+			if (train.getDirection() == Direction.EAST)
+			{
+				if (train.getVehicleX() > exitPoint2)
+				{
+					if (isTrain1 == false)
+					{
+						currentGateState.leaveStation();
+					}
+					isTrain2 = false;
+				}
+				else if(train.getVehicleX() > triggerPoint2){
+					currentGateState.approachStation();
+					isTrain2 = true;
+				} 
+			}
+			if (train.getDirection() == Direction.WEST)
+			{
+				if (train.getVehicleX() < exitPoint)
+				{
+					if (isTrain2 == false)
+					{
+						currentGateState.leaveStation();
+					}
+					isTrain1 = false;
+				}
+				else if(train.getVehicleX() < triggerPoint){
+					currentGateState.approachStation();
+					isTrain1 = true;
+				} 
+			}
 		}	
 	}
 }

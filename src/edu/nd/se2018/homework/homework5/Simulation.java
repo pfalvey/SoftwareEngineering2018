@@ -3,6 +3,7 @@ package edu.nd.se2018.homework.homework5;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import edu.nd.se2018.homework.homework5.model.infrastructure.Direction;
 import edu.nd.se2018.homework.homework5.model.infrastructure.MapBuilder;
 import edu.nd.se2018.homework.homework5.model.infrastructure.RailwayTracks;
 import edu.nd.se2018.homework.homework5.model.infrastructure.Road;
@@ -42,12 +43,17 @@ public class Simulation extends Application{
 				
 		// Train
 		RailwayTracks track = mapBuilder.getTrack("Royal");
-		Train train = new Train(track.getEndX()+100,track.getEndY()-25);
+		Train train = new Train(track.getEndX()+100,track.getEndY()-25, Direction.WEST);
 		root.getChildren().add(train.getImageView());
+		RailwayTracks track2 = mapBuilder.getTrack("BNSF");
+		Train train2 = new Train(track2.getStartX()-100, track2.getStartY()-25, Direction.EAST);
+		root.getChildren().add(train2.getImageView());
 		
 		for(CrossingGate gate: mapBuilder.getAllGates())
+		{
 			train.addObserver(gate);
-				
+			train2.addObserver(gate);
+		}		
 		// Sets up a repetitive loop i.e., in handle that runs the actual simulation
 		new AnimationTimer(){
 
@@ -56,12 +62,16 @@ public class Simulation extends Application{
 			
 				createCar();
 				train.move();
+				train2.move();
 				
 				for(CrossingGate gate: mapBuilder.getAllGates())
 					gate.operateGate();
 				
 				if (train.offScreen())
 					train.reset();
+				
+				if (train2.offScreen())
+					train2.reset();
 						
 				clearCars();				
 			}
