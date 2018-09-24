@@ -48,10 +48,10 @@ public class CrossingGate extends Observable implements Observer{
 		movingY = anchorY-60;
 		isTrain1 = false;
 		isTrain2 = false;
-		triggerPoint = anchorX+250;
-		exitPoint = anchorX-250;
-		triggerPoint2 = anchorX-250;
-		exitPoint2 = anchorX+250;
+		triggerPoint = anchorX+275;
+		exitPoint = anchorX-275;
+		triggerPoint2 = anchorX-275;
+		exitPoint2 = anchorX+275;
 		// Gate elements
 		line = new Line(anchorX, anchorY,movingX,movingY);
 		line.setStroke(Color.RED);
@@ -83,7 +83,7 @@ public class CrossingGate extends Observable implements Observer{
 			line.setEndX(movingX);
 			line.setEndY(movingY);
 		} else {
-			currentGateState.gateFinishedOpening();
+			currentGateState.gateFinishedClosing();
 		}
 	}
 	

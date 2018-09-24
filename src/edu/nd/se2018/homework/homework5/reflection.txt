@@ -24,12 +24,10 @@ to the western most road.
 For both of these designs, I think I could improve their checking and initiation to be
 more object oriented as opposed to hard coded. I hard coded my gate names and variables
 along with my train variables thus limiting my immediate design to two trains. I could 
-scale up with this design with a copy and paste. Also, not all of the car code runs 
-smoothly. Often, cars will pile up on each other if there are a lot of cars. Also,
-cars that are added after a gate is already down will cross through that gate. This may
-be because of the observer pattern and that since the gate is already down, it isn't
-changing so the new car isn't detecting any change. I tested the original railroad crossing
-code and this behavior was exhibited there.
+scale up with this design with a copy and paste. Also, despite some modifications, some
+of the cars pile up on each other while they are waiting. With reduced speed it works
+a bit better. Also setting the gate down to false for each new car helped stop the bug of 
+having new cars go through the gate even if the gate was closed
 
 Reflection question 2:
 As-is, some parts of my design would scale well and some parts would not. Fortunately for

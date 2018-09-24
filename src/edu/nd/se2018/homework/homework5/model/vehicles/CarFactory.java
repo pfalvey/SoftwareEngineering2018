@@ -37,7 +37,7 @@ public class CarFactory {
 		if (previousCar == null || location.y < previousCar.getVehicleY()-100){
 			Car car = new Car(location.x,location.y);	
 			double speedVariable = (Math.random() * 10)/10;
-			car.setSpeed((2-speedVariable)*1.5); 
+			car.setSpeed((2-speedVariable)*0.75); 
 			if (Math.floor(speedVariable * 10) % 3 == 0)
 			{
 				car.isTurning = true;
@@ -52,7 +52,7 @@ public class CarFactory {
 						gate.addObserver(car);
 					}
 					if(gate != null && gate.getTrafficCommand()=="STOP")
-						car.setGateDownFlag(false);
+						car.setGateDownFlag(true);
 				}
 			}
 			else if (roadID == 1)
@@ -65,7 +65,7 @@ public class CarFactory {
 							gate.addObserver(car);
 						}
 						if(gate != null && gate.getTrafficCommand()=="STOP")
-							car.setGateDownFlag(false);
+							car.setGateDownFlag(true);
 					}
 				}
 				else
@@ -76,7 +76,7 @@ public class CarFactory {
 							gate.addObserver(car);
 						}
 						if(gate != null && gate.getTrafficCommand()=="STOP")
-							car.setGateDownFlag(false);
+							car.setGateDownFlag(true);
 					}
 				}
 			}
