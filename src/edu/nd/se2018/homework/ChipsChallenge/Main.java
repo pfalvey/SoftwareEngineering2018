@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.Node;
 import javafx.stage.Stage;
 import edu.nd.se2018.homework.ChipsChallenge.controller.CCcontroller;
 import edu.nd.se2018.homework.ChipsChallenge.model.CCModel;
@@ -21,7 +20,7 @@ public class Main extends Application {
 	Image tileImage;
 	int scale = 20;
 	CCModel chip;
-	ChipGrid chipGrid;
+	CCView ccView;
 	CCcontroller ccController;
 
 	@Override
@@ -30,12 +29,17 @@ public class Main extends Application {
 		Scene scene = new Scene(root, 500, 500);
 		gameMap = new MapDisplay();
 		gameMap.setBlocks();
+		gameMap.setChips();
 		gameMap.drawMap(root.getChildren(), 20);
+		gameMap.drawLevel();
+		
 
-		chip = new CCModel(0, 0, gameMap.getMap());
-		chipGrid = new ChipGrid(chip);
-		chip.attachView(chipGrid);
-		ccController = new CCcontroller(gameMap.getMap());
+		chip = new CCModel(0, 0, gameMap);
+		chip.loadRootAndScale(root.getChildren(), scale);
+		ccView = new CCView(chip);
+		chip.attachView(ccView);
+		ccController = CCcontroller.getInstance(gameMap, chip);
+		ccController.loadRootAndScale(root.getChildren(), scale);
 		root.getChildren().add(ccController.getImageView());
 		
 		gameStage.setScene(scene);

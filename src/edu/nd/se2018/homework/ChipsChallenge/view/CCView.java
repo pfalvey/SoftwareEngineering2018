@@ -8,12 +8,12 @@ import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class ChipGrid implements Observer {
+public class CCView implements Observer {
 	public ImageView view;
 	private Image chipImage;
 	
 	
-	public ChipGrid(CCModel chip) {
+	public CCView(CCModel chip) {
 		chipImage = new Image("\\images\\chip\\textures\\chipDown.png", 50, 50, true, true);
 		view = new ImageView(chipImage);
 		view.setFitHeight(20);
@@ -25,6 +25,16 @@ public class ChipGrid implements Observer {
 	
 	public Node getView() {
 		return(view);	
+	}
+	
+	public void resetChip()
+	{
+		chipImage = new Image("\\images\\chip\\textures\\chipDown.png", 50, 50, true, true);
+		view = new ImageView(chipImage);
+		view.setFitHeight(20);
+		view.setFitWidth(20);
+		view.setX(0 * 20);
+		view.setY(0 * 20);
 	}
 
 	@Override
